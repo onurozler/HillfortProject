@@ -19,16 +19,10 @@ class LoginView : BaseView() {
 
     presenter = initPresenter(LoginPresenter(this)) as LoginPresenter
 
-    signUp.setOnClickListener {
-      val email = email.text.toString()
-      val password = password.text.toString()
-      if (email == "" || password == "") {
-        toast("Please provide email + password")
-      } else {
-        presenter.doSignUp(email, password)
-      }
-    }
 
+    signUp.setOnClickListener {
+      presenter.doSignUp()
+    }
     logIn.setOnClickListener {
       val email = email.text.toString()
       val password = password.text.toString()

@@ -97,10 +97,8 @@ class PlacemarkPresenter(view: BaseView) : BasePresenter(view) {
     async(UI) {
       if (edit) {
         app.placemarks.update(placemark)
-        view?.toast("eklenddddi")
       } else {
         app.placemarks.create(placemark)
-        view?.toast("eklendi")
       }
       view?.finish()
     }

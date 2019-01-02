@@ -11,6 +11,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.wit.androidhillfort.models.PlacemarkModel
 import org.wit.androidhillfort.views.editlocation.EditLocationView
 import org.wit.androidhillfort.views.login.LoginView
+import org.wit.androidhillfort.views.login.SignupView
 import org.wit.androidhillfort.views.map.PlacemarkMapView
 import org.wit.androidhillfort.views.placemark.PlacemarkView
 import org.wit.androidhillfort.views.placemarklist.PlacemarkListView
@@ -20,7 +21,7 @@ val IMAGE_REQUEST = 1
 val LOCATION_REQUEST = 2
 
 enum class VIEW {
-  LOCATION, PLACEMARK, MAPS, LIST, LOGIN, SPLASH
+  LOCATION, PLACEMARK, MAPS, LIST, LOGIN, SPLASH, SIGNUP
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
@@ -36,6 +37,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
       VIEW.LIST -> intent = Intent(this, PlacemarkListView::class.java)
       VIEW.LOGIN -> intent = Intent(this, LoginView::class.java)
       VIEW.SPLASH -> intent = Intent(this, SplashView::class.java)
+      VIEW.SIGNUP -> intent = Intent(this, SignupView::class.java)
     }
     if (key != "") {
       intent.putExtra(key, value)
