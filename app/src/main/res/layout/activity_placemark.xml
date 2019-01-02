@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="org.wit.androidhillfort.views.placemark.PlacemarkView">
+
+  <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/appBarLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorAccent"
+    android:fitsSystemWindows="true"
+    app:elevation="0dip"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbarAdd"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:titleTextColor="@color/colorPrimary" />
+
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="600dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <EditText
+      android:id="@+id/placemarkTitle"
+      android:layout_width="239dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:ems="10"
+      android:hint="@string/hint_placemarkTitle"
+      android:inputType="text"
+      app:layout_constraintBaseline_toBaselineOf="@+id/textView"
+      app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+      android:id="@+id/description"
+      android:layout_width="239dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:ems="10"
+      android:hint="@string/hint_placemarkDescription"
+      android:inputType="textPersonName"
+      app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+      app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+      android:id="@+id/chooseImage"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
+      android:text="@string/button_addImage"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/description" />
+
+    <ImageView
+      android:id="@+id/placemarkImage"
+      android:layout_width="0dp"
+      android:layout_height="139dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginEnd="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/chooseImage"
+      app:srcCompat="@drawable/ic_launcher_background" />
+
+    <com.google.android.gms.maps.MapView
+      android:id="@+id/mapView"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/placemarkImage" />
+
+    <TextView
+      android:id="@+id/textView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="Lat:"
+      app:layout_constraintBaseline_toBaselineOf="@+id/lat"
+      app:layout_constraintStart_toEndOf="@+id/placemarkTitle" />
+
+    <TextView
+      android:id="@+id/textView2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="Lng:"
+      app:layout_constraintBaseline_toBaselineOf="@+id/lng"
+      app:layout_constraintStart_toEndOf="@+id/description" />
+
+    <TextView
+      android:id="@+id/lat"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="72dp"
+      android:layout_marginEnd="8dp"
+      android:text="00.000000"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/textView"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:id="@+id/lng"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="20dp"
+      android:layout_marginEnd="8dp"
+      android:text="00.000000"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/textView2"
+      app:layout_constraintTop_toBottomOf="@+id/lat" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
