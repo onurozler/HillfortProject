@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.abc_list_menu_item_checkbox.*
 import kotlinx.android.synthetic.main.activity_placemark.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
@@ -58,6 +59,14 @@ class PlacemarkView : BaseView(), AnkoLogger {
   override fun showPlacemark(placemark: PlacemarkModel) {
     placemarkTitle.setText(placemark.title)
     description.setText(placemark.description)
+    datevisited.setText(placemark.vDate)
+    additonalnote.setText(placemark.aNotes)
+    if(placemarkTitle.text.toString() != ""){
+      checkBox.isChecked = true
+      datevisited.isEnabled = true
+      additonalnote.isEnabled = true
+    }
+
     Glide.with(this).load(placemark.hImage).into(placemarkImage);
     if (placemark.hImage != null) {
       chooseImage.setText(R.string.change_placemark_image)
@@ -80,7 +89,7 @@ class PlacemarkView : BaseView(), AnkoLogger {
         if (placemarkTitle.text.toString().isEmpty()) {
           toast(R.string.enter_placemark_title)
         } else {
-          presenter.doAddOrSave(placemarkTitle.text.toString(), description.text.toString())
+          presenter.doAddOrSave(placemarkTitle.text.toString(), description.text.toString(),additonalnote.text.toString(),datevisited.text.toString(),checkBox.isChecked)
         }
       }
     }

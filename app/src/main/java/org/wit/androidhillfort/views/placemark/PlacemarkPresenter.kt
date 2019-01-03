@@ -90,15 +90,25 @@ class PlacemarkPresenter(view: BaseView) : BasePresenter(view) {
   }
 
 
-  fun doAddOrSave(title: String, description: String) {
+  fun doAddOrSave(title: String, description: String, aNotes: String, vDate: String,visited: Boolean) {
     placemark.title = title
     placemark.description = description
+    placemark.aNotes = aNotes
+    placemark.vDate = vDate
+
 
     async(UI) {
       if (edit) {
         app.placemarks.update(placemark)
       } else {
-        app.placemarks.create(placemark)
+        if(visited){
+          app.placemarks.create(placemark)
+        }
+        else
+        {
+          app.placemarks.createAll(placemark)
+        }
+
       }
       view?.finish()
     }

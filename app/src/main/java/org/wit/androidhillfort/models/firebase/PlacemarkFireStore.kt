@@ -17,6 +17,7 @@ import java.io.File
 class PlacemarkFireStore(val context: Context) : PlacemarkStore, AnkoLogger {
 
 
+
   val placemarks = ArrayList<PlacemarkModel>()
   val allPlacemarks = ArrayList<PlacemarkModel>()
   lateinit var userId: String
@@ -25,6 +26,9 @@ class PlacemarkFireStore(val context: Context) : PlacemarkStore, AnkoLogger {
 
   suspend override fun findAll(): List<PlacemarkModel> {
     return placemarks
+  }
+  override suspend fun findAllofThem(): List<PlacemarkModel> {
+    return allPlacemarks
   }
 
   suspend override fun findById(id: Long): PlacemarkModel? {
@@ -48,10 +52,11 @@ class PlacemarkFireStore(val context: Context) : PlacemarkStore, AnkoLogger {
       placemark.fbId = key
       placemarks.add(placemark)
       db.child("users").child(userId).child("placemarks").child(key).setValue(placemark)
+      db.child("allhillforts").child("placemarks").child(key).setValue(placemark)
       updateImage(placemark)
-
-
     }
+
+
   }
 
   suspend override fun update(placemark: PlacemarkModel) {
@@ -61,15 +66,19 @@ class PlacemarkFireStore(val context: Context) : PlacemarkStore, AnkoLogger {
       foundPlacemark.description = placemark.description
       foundPlacemark.hImage = placemark.hImage
       foundPlacemark.location = placemark.location
+      foundPlacemark.aNotes = placemark.aNotes
+      foundPlacemark.vDate = placemark.vDate
     }
 
     db.child("users").child(userId).child("placemarks").child(placemark.fbId).setValue(placemark)
+    db.child("allhillforts").child("placemarks").child(placemark.fbId).setValue(placemark)
     if ((placemark.hImage.length) > 0 && (placemark.hImage[0] != 'h')) {
       updateImage(placemark)
     }
   }
 
   suspend override fun delete(placemark: PlacemarkModel) {
+    db.child("allhillforts").child("placemarks").child(placemark.fbId).removeValue()
     db.child("users").child(userId).child("placemarks").child(placemark.fbId).removeValue()
     placemarks.remove(placemark)
   }

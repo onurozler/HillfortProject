@@ -13,6 +13,8 @@ data class PlacemarkModel(@PrimaryKey(autoGenerate = true) var hId: Long = 0,
                           var title: String = "",
                           var description: String = "",
                           var hImage: String = "",
+                          var vDate: String = "",
+                          var aNotes: String = "",
                           @Embedded var location : Location = Location()): Parcelable
 
 @Parcelize
