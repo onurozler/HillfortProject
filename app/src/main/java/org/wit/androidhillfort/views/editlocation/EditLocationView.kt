@@ -1,17 +1,31 @@
 package org.wit.androidhillfort.views.editlocation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.activity_edit_location.*
 import org.wit.androidhillfort.R
 import org.wit.androidhillfort.views.BaseView
 
-class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
+class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener, OnMapClickListener {
+
 
   lateinit var presenter: EditLocationPresenter
+
+  override fun onMapClick(p0: LatLng) {
+
+    mapView.getMapAsync {
+      presenter.doAddMarker(it,p0)
+    }
+
+    lat.setText(""+String.format("%.8f", p0.latitude).toDouble())
+    lng.setText(""+String.format("%.8f", p0.longitude).toDouble())
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -24,6 +38,7 @@ class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener, GoogleMap.O
     mapView.getMapAsync {
       it.setOnMarkerDragListener(this)
       it.setOnMarkerClickListener(this)
+      it.setOnMapClickListener(this)
       presenter.doConfigureMap(it)
     }
   }

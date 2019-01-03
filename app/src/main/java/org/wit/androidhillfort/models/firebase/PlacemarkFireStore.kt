@@ -16,7 +16,9 @@ import java.io.File
 
 class PlacemarkFireStore(val context: Context) : PlacemarkStore, AnkoLogger {
 
+
   val placemarks = ArrayList<PlacemarkModel>()
+  val allPlacemarks = ArrayList<PlacemarkModel>()
   lateinit var userId: String
   lateinit var db: DatabaseReference
   lateinit var st: StorageReference
@@ -30,17 +32,22 @@ class PlacemarkFireStore(val context: Context) : PlacemarkStore, AnkoLogger {
     return foundPlacemark
   }
 
-  suspend override fun create(placemark: PlacemarkModel) {
-    Log.i("deneme","o")
-    val key = db.child("users").child(userId).child("placemarks").push().key
-    Log.i("deneme","oc")
+  override suspend fun createAll(placemark: PlacemarkModel) {
+    val key = db.child("allhillforts").child("placemarks").push().key
     key?.let {
-      Log.i("deneme","oce")
+      placemark.fbId = key
+      allPlacemarks.add(placemark)
+      db.child("allhillforts").child("placemarks").child(key).setValue(placemark)
+      updateImage(placemark)
+    }
+  }
+
+  suspend override fun create(placemark: PlacemarkModel) {
+    val key = db.child("users").child(userId).child("placemarks").push().key
+    key?.let {
       placemark.fbId = key
       placemarks.add(placemark)
-      Log.i("deneme","oce")
       db.child("users").child(userId).child("placemarks").child(key).setValue(placemark)
-      Log.i("deneme","ocee")
       updateImage(placemark)
 
 

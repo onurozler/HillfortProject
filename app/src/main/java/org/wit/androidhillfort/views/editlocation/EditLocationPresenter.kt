@@ -45,4 +45,15 @@ class EditLocationPresenter(view: BaseView) : BasePresenter(view) {
     val loc = LatLng(location.lat, location.lng)
     marker.setSnippet("GPS : " + loc.toString())
   }
+
+  fun doAddMarker(map: GoogleMap,p0: LatLng)
+  {
+    map.clear()
+    val mark = LatLng(p0.latitude, p0.longitude)
+    val addMarker = map.addMarker(MarkerOptions().position(mark).title("New Marker"))
+    doUpdateLocation(p0.latitude,p0.longitude)
+    doUpdateMarker(addMarker)
+
+
+  }
 }

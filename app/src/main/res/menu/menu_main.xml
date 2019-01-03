@@ -9,10 +9,28 @@
     app:showAsAction="never"/>
 
   <item
+      android:id="@+id/item_search_hillfort"
+      android:icon="@android:drawable/ic_menu_mapmode"
+      android:title="Sarch Hillfort"
+      app:showAsAction="never"/>
+
+  <item
     android:id="@+id/item_map"
     android:icon="@android:drawable/ic_menu_mapmode"
     android:title="@string/menu_showMap"
     app:showAsAction="never"/>
+
+  <item
+      android:id="@+id/item_favourites"
+      android:icon="@android:drawable/ic_menu_mapmode"
+      android:title="Favourites"
+      app:showAsAction="never"/>
+
+  <item
+      android:id="@+id/item_navigator"
+      android:icon="@android:drawable/ic_menu_mapmode"
+      android:title="Navigator"
+      app:showAsAction="never"/>
 
   <item
       android:id="@+id/item_setting"

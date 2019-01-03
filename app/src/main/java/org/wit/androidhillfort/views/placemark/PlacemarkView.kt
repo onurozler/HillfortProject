@@ -11,6 +11,8 @@ import org.jetbrains.anko.toast
 import org.wit.androidhillfort.R
 import org.wit.androidhillfort.models.PlacemarkModel
 import org.wit.androidhillfort.views.BaseView
+import java.text.SimpleDateFormat
+import java.util.*
 
 class PlacemarkView : BaseView(), AnkoLogger {
 
@@ -25,11 +27,30 @@ class PlacemarkView : BaseView(), AnkoLogger {
 
     presenter = initPresenter (PlacemarkPresenter(this)) as PlacemarkPresenter
 
+    datevisited.isEnabled = false
+    additonalnote.isEnabled = false
+
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync {
       presenter.doConfigureMap(it)
       it.setOnMapClickListener { presenter.doSetLocation() }
     }
+
+    checkBox.setOnCheckedChangeListener({
+      buttonView, isChecked ->
+      if (isChecked){
+        datevisited.isEnabled = true
+        additonalnote.isEnabled = true
+
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        val currentDate = sdf.format(Date())
+        datevisited.setText(currentDate)
+      }else{
+        datevisited.isEnabled = false
+        additonalnote.isEnabled = false
+        datevisited.setText("Visited Date")
+      }
+    })
 
     chooseImage.setOnClickListener { presenter.doSelectImage() }
   }

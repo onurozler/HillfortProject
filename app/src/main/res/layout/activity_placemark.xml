@@ -66,6 +66,40 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/description" />
 
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Visited"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseImage"
+        />
+
+    <EditText
+        android:id="@+id/datevisited"
+        android:layout_width="239dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="110dp"
+        android:ems="10"
+        android:hint="Visited Date"
+        android:inputType="text"
+        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/additonalnote"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:hint="Additional Notes"
+        android:inputType="text"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox"
+        />
+
     <ImageView
       android:id="@+id/placemarkImage"
       android:layout_width="0dp"
@@ -76,15 +110,16 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/chooseImage"
+      app:layout_constraintTop_toBottomOf="@+id/additonalnote"
       app:srcCompat="@drawable/ic_launcher_background" />
+
 
     <com.google.android.gms.maps.MapView
       android:id="@+id/mapView"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_marginStart="8dp"
-      android:layout_marginTop="8dp"
+      android:layout_marginTop="5dp"
       android:layout_marginEnd="8dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"

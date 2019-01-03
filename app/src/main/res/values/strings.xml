@@ -4,7 +4,7 @@
     <string name="hint_placemarkDescription">Description </string>
     <string name="button_addPlacemark">Add Placemark</string>
     <string name="menu_addPlacemark">Add Hillfort</string>
-    <string name="menu_showMap">Visited Hillforts</string>
+    <string name="menu_showMap">Show All Hillforts</string>
     <string name="menu_logout">Logout</string>
     <string name="menu_savePlacemark">Save</string>
     <string name="enter_placemark_title"> Please enter a Placemark Title </string>
