@@ -5,7 +5,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="org.wit.androidhillfort.views.placemark.PlacemarkView">
+  tools:context="org.wit.androidhillfort.views.placemark.SearchView">
 
   <com.google.android.material.appbar.AppBarLayout
     android:id="@+id/appBarLayout"
@@ -37,7 +37,7 @@
       android:id="@+id/placemarkTitle"
       android:layout_width="239dp"
       android:layout_height="wrap_content"
-      android:layout_marginStart="8dp"
+      android:layout_marginStart="2dp"
       android:ems="10"
       android:hint="@string/hint_placemarkTitle"
       android:inputType="text"
@@ -75,12 +75,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseImage"
         />
+    <CheckBox
+        android:id="@+id/checkFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Favourite"
+        android:layout_marginStart="80dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox"
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
     <EditText
         android:id="@+id/datevisited"
-        android:layout_width="239dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="110dp"
+        android:layout_marginStart="195dp"
         android:ems="10"
         android:hint="Visited Date"
         android:inputType="text"

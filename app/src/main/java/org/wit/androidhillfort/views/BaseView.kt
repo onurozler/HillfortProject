@@ -14,6 +14,7 @@ import org.wit.androidhillfort.views.login.LoginView
 import org.wit.androidhillfort.views.login.SignupView
 import org.wit.androidhillfort.views.map.PlacemarkMapView
 import org.wit.androidhillfort.views.placemark.PlacemarkView
+import org.wit.androidhillfort.views.placemark.SearchView
 import org.wit.androidhillfort.views.placemarklist.PlacemarkListView
 import org.wit.androidhillfort.views.splashscreen.SplashView
 
@@ -21,7 +22,7 @@ val IMAGE_REQUEST = 1
 val LOCATION_REQUEST = 2
 
 enum class VIEW {
-  LOCATION, PLACEMARK, MAPS, LIST, LOGIN, SPLASH, SIGNUP
+  LOCATION, PLACEMARK, MAPS, LIST, LOGIN, SPLASH, SIGNUP, SEARCH
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
@@ -38,13 +39,30 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
       VIEW.LOGIN -> intent = Intent(this, LoginView::class.java)
       VIEW.SPLASH -> intent = Intent(this, SplashView::class.java)
       VIEW.SIGNUP -> intent = Intent(this, SignupView::class.java)
+      VIEW.SEARCH -> intent = Intent(this,SearchView::class.java)
     }
     if (key != "") {
       intent.putExtra(key, value)
     }
     startActivityForResult(intent, code)
   }
-
+  fun navigateTo2(view: VIEW, code: Int = 0, key: String = "", value: String? = null) {
+    var intent = Intent(this, PlacemarkListView::class.java)
+    when (view) {
+      VIEW.LOCATION -> intent = Intent(this, EditLocationView::class.java)
+      VIEW.PLACEMARK -> intent = Intent(this, PlacemarkView::class.java)
+      VIEW.MAPS -> intent = Intent(this, PlacemarkMapView::class.java)
+      VIEW.LIST -> intent = Intent(this, PlacemarkListView::class.java)
+      VIEW.LOGIN -> intent = Intent(this, LoginView::class.java)
+      VIEW.SPLASH -> intent = Intent(this, SplashView::class.java)
+      VIEW.SIGNUP -> intent = Intent(this, SignupView::class.java)
+      VIEW.SEARCH -> intent = Intent(this,SearchView::class.java)
+    }
+    if (key != "") {
+      intent.putExtra(key, value)
+    }
+    startActivityForResult(intent, code)
+  }
   fun initPresenter(presenter: BasePresenter): BasePresenter {
     basePresenter = presenter
     return presenter

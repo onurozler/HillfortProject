@@ -2,6 +2,7 @@ package org.wit.androidhillfort.views.placemark
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.util.Log
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
@@ -35,7 +36,16 @@ class PlacemarkPresenter(view: BaseView) : BasePresenter(view) {
       edit = true
       placemark = view.intent.extras.getParcelable<PlacemarkModel>("placemark_edit")
       view.showPlacemark(placemark)
-    } else {
+    }
+    else if(view.intent.hasExtra("placemark_search"))
+    {
+        val sa:String = view.intent.getStringExtra("placemark_search")
+      async(UI) {
+        placemark = app.placemarks.findByName(sa)!!
+      }
+        view.showPlacemark(placemark)
+    }
+    else {
       if (checkLocationPermissions(view)) {
         doSetCurrentLocation()
       }
@@ -90,11 +100,12 @@ class PlacemarkPresenter(view: BaseView) : BasePresenter(view) {
   }
 
 
-  fun doAddOrSave(title: String, description: String, aNotes: String, vDate: String,visited: Boolean) {
+  fun doAddOrSave(title: String, description: String, aNotes: String, vDate: String,visited: Boolean, fav: Int) {
     placemark.title = title
     placemark.description = description
     placemark.aNotes = aNotes
     placemark.vDate = vDate
+    placemark.fav = fav
 
 
     async(UI) {

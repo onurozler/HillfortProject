@@ -30,6 +30,8 @@ class PlacemarkView : BaseView(), AnkoLogger {
 
     datevisited.isEnabled = false
     additonalnote.isEnabled = false
+    checkFav.isEnabled = false
+
 
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync {
@@ -42,6 +44,7 @@ class PlacemarkView : BaseView(), AnkoLogger {
       if (isChecked){
         datevisited.isEnabled = true
         additonalnote.isEnabled = true
+        checkFav.isEnabled = true
 
         val sdf = SimpleDateFormat("dd/MM/yyyy")
         val currentDate = sdf.format(Date())
@@ -49,6 +52,7 @@ class PlacemarkView : BaseView(), AnkoLogger {
       }else{
         datevisited.isEnabled = false
         additonalnote.isEnabled = false
+        checkFav.isEnabled = false
         datevisited.setText("Visited Date")
       }
     })
@@ -61,10 +65,17 @@ class PlacemarkView : BaseView(), AnkoLogger {
     description.setText(placemark.description)
     datevisited.setText(placemark.vDate)
     additonalnote.setText(placemark.aNotes)
+      checkFav.isChecked = false
+      if(placemark.fav == 1)
+      {
+          checkFav.isChecked = true
+      }
+
     if(placemarkTitle.text.toString() != ""){
       checkBox.isChecked = true
       datevisited.isEnabled = true
       additonalnote.isEnabled = true
+      checkFav.isEnabled = true
     }
 
     Glide.with(this).load(placemark.hImage).into(placemarkImage);
@@ -89,7 +100,12 @@ class PlacemarkView : BaseView(), AnkoLogger {
         if (placemarkTitle.text.toString().isEmpty()) {
           toast(R.string.enter_placemark_title)
         } else {
-          presenter.doAddOrSave(placemarkTitle.text.toString(), description.text.toString(),additonalnote.text.toString(),datevisited.text.toString(),checkBox.isChecked)
+          var sa = 0
+          if(checkFav.isChecked)
+          {
+            sa = 1
+          }
+          presenter.doAddOrSave(placemarkTitle.text.toString(), description.text.toString(),additonalnote.text.toString(),datevisited.text.toString(),checkBox.isChecked,sa)
         }
       }
     }

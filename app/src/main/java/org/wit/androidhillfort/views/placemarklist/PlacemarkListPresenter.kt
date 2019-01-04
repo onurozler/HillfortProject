@@ -1,5 +1,6 @@
 package org.wit.androidhillfort.views.placemarklist
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
@@ -26,6 +27,10 @@ class PlacemarkListPresenter(view: BaseView) : BasePresenter(view) {
     async(UI) {
       view?.showPlacemarks(app.placemarks.findAll())
     }
+  }
+
+  fun loadPlacemarkByName() {
+    view?.navigateTo(VIEW.SEARCH)
   }
 
   fun doLogout() {

@@ -17,18 +17,28 @@ import java.io.File
 class PlacemarkFireStore(val context: Context) : PlacemarkStore, AnkoLogger {
 
 
-
   val placemarks = ArrayList<PlacemarkModel>()
   val allPlacemarks = ArrayList<PlacemarkModel>()
   lateinit var userId: String
   lateinit var db: DatabaseReference
   lateinit var st: StorageReference
 
+
+  override suspend fun findAllofThem(): List<PlacemarkModel> {
+    return allPlacemarks
+  }
+
   suspend override fun findAll(): List<PlacemarkModel> {
     return placemarks
   }
-  override suspend fun findAllofThem(): List<PlacemarkModel> {
-    return allPlacemarks
+
+  override suspend fun findAllFav(): List<PlacemarkModel> {
+    return  placemarks
+  }
+
+  override suspend fun findByName(name: String): PlacemarkModel? {
+    val foundPlacemark: PlacemarkModel? = placemarks.find { p -> p.title == name }
+    return foundPlacemark
   }
 
   suspend override fun findById(id: Long): PlacemarkModel? {
@@ -85,6 +95,7 @@ class PlacemarkFireStore(val context: Context) : PlacemarkStore, AnkoLogger {
 
   override fun clear() {
     placemarks.clear()
+
   }
 
   fun updateImage(placemark: PlacemarkModel) {
@@ -118,6 +129,7 @@ class PlacemarkFireStore(val context: Context) : PlacemarkStore, AnkoLogger {
       }
       override fun onDataChange(dataSnapshot: DataSnapshot) {
         dataSnapshot!!.children.mapNotNullTo(placemarks) { it.getValue<PlacemarkModel>(PlacemarkModel::class.java) }
+        dataSnapshot!!.children.mapNotNullTo(allPlacemarks) { it.getValue<PlacemarkModel>(PlacemarkModel::class.java) }
         placemarksReady()
       }
     }
@@ -126,5 +138,7 @@ class PlacemarkFireStore(val context: Context) : PlacemarkStore, AnkoLogger {
     st = FirebaseStorage.getInstance().reference
     placemarks.clear()
     db.child("users").child(userId).child("placemarks").addListenerForSingleValueEvent(valueEventListener)
+    //  allPlacemarks.clear()
+    //  db.child("allhillforts").child("placemarks").addListenerForSingleValueEvent(valueEventListener)
   }
 }
