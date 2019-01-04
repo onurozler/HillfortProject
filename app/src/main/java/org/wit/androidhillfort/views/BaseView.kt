@@ -13,6 +13,8 @@ import org.wit.androidhillfort.views.editlocation.EditLocationView
 import org.wit.androidhillfort.views.login.LoginView
 import org.wit.androidhillfort.views.login.SignupView
 import org.wit.androidhillfort.views.map.PlacemarkMapView
+import org.wit.androidhillfort.views.navigator.NavigatorPresenter
+import org.wit.androidhillfort.views.navigator.NavigatorView
 import org.wit.androidhillfort.views.placemark.PlacemarkView
 import org.wit.androidhillfort.views.placemark.SearchView
 import org.wit.androidhillfort.views.placemarklist.PlacemarkListView
@@ -22,7 +24,7 @@ val IMAGE_REQUEST = 1
 val LOCATION_REQUEST = 2
 
 enum class VIEW {
-  LOCATION, PLACEMARK, MAPS, LIST, LOGIN, SPLASH, SIGNUP, SEARCH
+  LOCATION, PLACEMARK, MAPS, LIST, LOGIN, SPLASH, SIGNUP, SEARCH, NAVIGATOR
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
@@ -40,6 +42,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
       VIEW.SPLASH -> intent = Intent(this, SplashView::class.java)
       VIEW.SIGNUP -> intent = Intent(this, SignupView::class.java)
       VIEW.SEARCH -> intent = Intent(this,SearchView::class.java)
+      VIEW.NAVIGATOR -> intent = Intent(this, NavigatorView::class.java)
     }
     if (key != "") {
       intent.putExtra(key, value)
